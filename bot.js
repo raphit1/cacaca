@@ -1,5 +1,19 @@
-process.on('unhandledRejection', e => console.error(e));
+const express = require('express');
 const { Client, GatewayIntentBits } = require('discord.js');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Serveur web minimal pour Render
+app.get('/', (req, res) => {
+  res.send('Bot en ligne');
+});
+app.listen(PORT, () => {
+  console.log(`Serveur web lancé sur le port ${PORT}`);
+});
+
+// Gestion des erreurs non gérées
+process.on('unhandledRejection', e => console.error('Erreur non gérée :', e));
 
 const client = new Client({
   intents: [
